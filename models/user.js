@@ -10,10 +10,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
+      validate: {
+        isEmail: {
+          msg: "invalid email"
+        }
+      }
     },
     password: {
       type: DataTypes.STRING,
-    }
+      validate: {
+        len: {
+          args: [6, 32],
+          msg: "Password must be between 6 and 32 characters"
+        }
+      }
+  },
+  facebookId: DataTypes.STRING,
+  facebookToken: DataTypes.STRING
   }, {
     hooks: {
       beforeCreate: function(pendingUser, options){
